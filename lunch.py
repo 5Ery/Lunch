@@ -53,7 +53,8 @@ TEAM_FAVORITES = {Team.Eric_Schrock: Restaurant.Grindstone_Charleys,
                   Team.Sandeep_Borra: Restaurant.Mexican_Grill,
                   Team.Satish_Vaishnav: Restaurant.PASTArrific,
                   Team.Kishore_Yenduri: Restaurant.Jays_Thai,
-                  Team.Devin_Jaenicke: Restaurant.PASTArrific}
+                  Team.Devin_Jaenicke: Restaurant.PASTArrific,
+                  Team.Ashesh_Goswami: Restaurant.Taku_Japanese_Steakhouse}
 
 TEAM_BLACKLIST = {Team.Devin_Jaenicke: [Restaurant.Jays_Thai]}
 
