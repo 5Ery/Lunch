@@ -60,7 +60,7 @@ TEAM_BLACKLIST = {Team.Devin_Jaenicke: [Restaurant.Jays_Thai]}
 
 GUEST_BLACKLIST = []
 
-LAST_RESTAURANT = Restaurant.PASTArrific
+LAST_RESTAURANT = Restaurant.Hacienda
 
 NOT_COMING = []
 
@@ -75,7 +75,7 @@ NOT_COMING = []
 ###############################################################################
 if __name__ == "__main__":
     # Create initial restaurants list
-    restaurants = [r for r in Restaurant]  # Add list of area restaurants
+    restaurants = [restaurant for restaurant in Restaurant]  # Add list of area restaurants
 
     # Increase the chance of team favorites being selected (for everyone who is coming)
     restaurants += [TEAM_FAVORITES[key] for key in TEAM_FAVORITES.keys() if key not in NOT_COMING]
