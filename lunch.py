@@ -2,7 +2,7 @@
 #   Script Header
 ###############################################################################
 __author__ = 'Eric Schrock'
-__version__ = '2.0.0'
+__version__ = '3.0'
 __email__ = 'eric.schrock@aptiv.com'
 ###############################################################################
 
@@ -22,27 +22,35 @@ class Team(Enum):
     Eric_Schrock = "Eric Schrock"
     Kin_Man_Lee = "Kin Man Lee"
     Sandeep_Borra = "Sandeep Borra"
-    Satish_Vaishnav = "Satish Vaishnav"
     Kishore_Yenduri = "Kishore Yenduri"
     Devin_Jaenicke = "Devin Jaenicke"
     Ashesh_Goswami = "Ashesh Goshwami"
+    Ravikumar_Vanjara = "Ravikumar Vanjara"
+
 
 class Restaurant(Enum):
-    Grindstone_Charleys = "Grindstone Charley's"
-    PASTArrific = "PASTArrific"
-    Don_Panchos = "Don Pancho's"
-    Mexican_Grill = "Mexican Grill"
-    Hacienda = "Hacienda"
-    Jays_Thai = "Jay's Thai"
-    Red_Lobster = "Red Lobster"
-    Olive_Garden = "Olive Garden"
-    Mancinos = "Mancino's"
-    Half_Moon = "Half Moon"
-    Mi_Familia = "Mi Familia"
-    Taku_Japanese_Steakhouse = "Taku Japanese Steakhouse"
     Cracker_Barrel = "Cracker Barrel"
-    Tokyo_Cuisine = "Tokyo Cuisine"
+    Don_Panchos = "Don Pancho's"
+    Grindstone_Charleys = "Grindstone Charley's"
+    Hacienda = "Hacienda"
+    Half_Moon = "Half Moon"
+    Jays_Thai = "Jay's Thai"
     Lucky_Indian_Cuisine = "Lucky Indian Cuisine"
+    Mancinos = "Mancino's"
+    Mexican_Grill = "Mexican Grill"
+    Mi_Familia = "Mi Familia"
+    PASTArrific = "PASTArrific"
+    Olive_Garden = "Olive Garden"
+    Red_Lobster = "Red Lobster"
+    Taku_Japanese_Steakhouse = "Taku Japanese Steakhouse"
+    Tokyo_Cuisine = "Tokyo Cuisine"
+
+
+class RestaurantType(Enum):
+    American = "American"
+    Asian = "Asian"
+    Italian = "Italian"
+    Mexican = "Mexican"
 
 
 ###############################################################################
@@ -51,19 +59,40 @@ class Restaurant(Enum):
 TEAM_FAVORITES = {Team.Eric_Schrock: Restaurant.Grindstone_Charleys,
                   Team.Kin_Man_Lee: Restaurant.Grindstone_Charleys,
                   Team.Sandeep_Borra: Restaurant.Mexican_Grill,
-                  Team.Satish_Vaishnav: Restaurant.PASTArrific,
                   Team.Kishore_Yenduri: Restaurant.Jays_Thai,
                   Team.Devin_Jaenicke: Restaurant.PASTArrific,
-                  Team.Ashesh_Goswami: Restaurant.Taku_Japanese_Steakhouse}
+                  Team.Ashesh_Goswami: Restaurant.Taku_Japanese_Steakhouse,
+                  Team.Ravikumar_Vanjara: Restaurant.PASTArrific}
 
-TEAM_BLACKLIST = {Team.Devin_Jaenicke: [Restaurant.Jays_Thai]}
+TEAM_BLACKLIST = {Team.Eric_Schrock: [],
+                  Team.Kin_Man_Lee: [],
+                  Team.Sandeep_Borra: [Restaurant.Cracker_Barrel, Restaurant.Red_Lobster],
+                  Team.Kishore_Yenduri: [Restaurant.Cracker_Barrel, Restaurant.Red_Lobster],
+                  Team.Devin_Jaenicke: [Restaurant.Jays_Thai],
+                  Team.Ashesh_Goswami: [Restaurant.Cracker_Barrel, Restaurant.Red_Lobster],
+                  Team.Ravikumar_Vanjara: [Restaurant.Cracker_Barrel, Restaurant.Red_Lobster]}
 
 GUEST_BLACKLIST = []
 
-LAST_RESTAURANT = Restaurant.Hacienda
+LAST_RESTAURANT = Restaurant.Half_Moon
 
 NOT_COMING = []
 
+RESTAURANT_TYPES = {Restaurant.Cracker_Barrel: RestaurantType.American,
+                    Restaurant.Don_Panchos: RestaurantType.Mexican,
+                    Restaurant.Grindstone_Charleys: RestaurantType.American,
+                    Restaurant.Hacienda: RestaurantType.Mexican,
+                    Restaurant.Half_Moon: RestaurantType.American,
+                    Restaurant.Jays_Thai: RestaurantType.Asian,
+                    Restaurant.Lucky_Indian_Cuisine: RestaurantType.Asian,
+                    Restaurant.Mancinos: RestaurantType.Italian,
+                    Restaurant.Mexican_Grill: RestaurantType.Mexican,
+                    Restaurant.Mi_Familia: RestaurantType.Mexican,
+                    Restaurant.PASTArrific: RestaurantType.Italian,
+                    Restaurant.Olive_Garden: RestaurantType.Italian,
+                    Restaurant.Red_Lobster: RestaurantType.American,
+                    Restaurant.Taku_Japanese_Steakhouse: RestaurantType.Asian,
+                    Restaurant.Tokyo_Cuisine: RestaurantType.Asian}
 
 ###############################################################################
 #   Classes
@@ -85,6 +114,9 @@ if __name__ == "__main__":
 
     # Remove the last restaurant we went to
     restaurants = [restaurant for restaurant in restaurants if restaurant != LAST_RESTAURANT]
+
+    # Remove restaurants similar to the last restaurant we went to
+    restaurants = [restaurant for restaurant in restaurants if RESTAURANT_TYPES[restaurant] != RESTAURANT_TYPES[LAST_RESTAURANT]]
 
     # Remove restaurants from the guest black list
     restaurants = [restaurant for restaurant in restaurants if restaurant not in GUEST_BLACKLIST]
@@ -139,6 +171,7 @@ if __name__ == "__main__":
 #    Date        By                     Description
 # MM/DD/YYYY    Name        JIRA AAA-#### Explanation of changes
 # ----------  ---------     ------------------------------------
-# 04/05/2019  Eric Schrock  Initial version
-# 06/13/2019  Eric Schrock  Added blacklists
+# 04/05/2019  Eric Schrock  v1.0 - Initial version
+# 06/13/2019  Eric Schrock  v2.0 - Added blacklists
+# 10/03/2019  Eric Schrock  v3.0 - Added restaurant types
 ###############################################################################
