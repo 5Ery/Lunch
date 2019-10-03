@@ -131,11 +131,11 @@ if __name__ == "__main__":
     lunch_saved = False
 
     for line in fileinput.input("lunch.py", inplace=True):
-       if "LAST_RESTAURANT" in line and not lunch_saved:
-          sys.stdout.write('LAST_RESTAURANT = %s\n' % lunch)
-          lunch_saved = True
-       else:
-          sys.stdout.write(line)
+        if "LAST_RESTAURANT" in line and not lunch_saved:
+            sys.stdout.write('LAST_RESTAURANT = %s\n' % lunch)
+            lunch_saved = True
+        else:
+            sys.stdout.write(line)
 
     print(lunch.value)
 
