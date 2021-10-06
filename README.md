@@ -1,2 +1,2 @@
 # Lunch
-Script for choosing a restaurant for a group of people
+A script for choosing a restaurant for a group of people.
